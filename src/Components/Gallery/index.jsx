@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Gallery = () => {
   const [galleryImages, setGalleryImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +19,7 @@ const Gallery = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:8000/gallery?page=${currentPage}&limit=7`
+          `${apiUrl}/gallery?page=${currentPage}&limit=7`
         );
         if (!response.ok) {
           throw new Error("Gallery images not found");

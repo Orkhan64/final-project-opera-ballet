@@ -8,6 +8,8 @@ import "../../Components/Products/loading.css";
 import ballerinaImages from "../../assets/school.png";
 import { cartStore } from "../../Store/cartStore.js";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Detail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -38,7 +40,7 @@ const Detail = () => {
         return;
       }
       try {
-        const response = await fetch(`http://localhost:8000/products/${id}`);
+        const response = await fetch(`${apiUrl}/products/${id}`);
         if (!response.ok) {
           throw new Error("Product details could not be retrieved.");
         }

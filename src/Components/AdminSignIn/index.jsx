@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const AdminSignIn = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,7 @@ const AdminSignIn = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/auth/sign-in", {
+      const response = await fetch(`${apiUrl}/auth/sign-in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

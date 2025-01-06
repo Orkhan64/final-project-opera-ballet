@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const NewsRectangle = () => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,7 +12,7 @@ const NewsRectangle = () => {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const response = await fetch("http://localhost:8000/newsSections");
+        const response = await fetch(`${apiUrl}/newsSections`);
         const data = await response.json();
         setSlides(data);
       } catch (error) {

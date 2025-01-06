@@ -5,6 +5,8 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const SignIn = () => {
   const [passwordState, setPasswordState] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,7 +23,7 @@ const SignIn = () => {
     const password = passwordRef.current.value.trim();
 
     try {
-      const response = await fetch("http://localhost:8000/auth/sign-in", {
+      const response = await fetch(`${apiUrl}/auth/sign-in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,8 @@ import EventsImage from "../../../assets/Events.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +23,7 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:8000/movie");
+        const response = await fetch(`${apiUrl}/movie`);
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }

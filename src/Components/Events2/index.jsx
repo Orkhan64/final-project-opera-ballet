@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Events2 = () => {
   const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +16,7 @@ const Events2 = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:8000/streams");
+        const response = await fetch(`${apiUrl}/streams`);
         const data = await response.json();
         setEvents(data);
       } catch (error) {

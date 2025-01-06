@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import NewsImage from "../../assets/Rectangle 25.svg"; 
+import NewsImage from "../../assets/Rectangle 25.svg";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const NewsBackground = () => {
   const [newsData, setNewsData] = useState([]);
@@ -8,7 +10,7 @@ const NewsBackground = () => {
 
   const fetchNews = async () => {
     try {
-      const response = await fetch("http://localhost:8000/news");
+      const response = await fetch(`${apiUrl}/news`);
       if (!response.ok) {
         throw new Error("No news received");
       }

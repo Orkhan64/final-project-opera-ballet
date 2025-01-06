@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import ballerinaImages from "../../assets/school.png";
 import "./loading.css";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:8000/products");
+        const response = await fetch(`${apiUrl}/products`);
         if (!response.ok) {
           throw new Error("Products could not be received.");
         }

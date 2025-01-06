@@ -1,5 +1,7 @@
 import { create } from "zustand";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const cartStore = create((set) => ({
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   userId: null,
@@ -10,7 +12,7 @@ export const cartStore = create((set) => ({
 
   addToCart: async (newItem) => {
     try {
-      const response = await fetch("http://localhost:8000/baskets/add", {
+      const response = await fetch(`${apiUrl}/baskets/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newItem),
@@ -69,7 +71,7 @@ export const cartStore = create((set) => ({
         return;
       }
 
-      const response = await fetch("http://localhost:8000/baskets/update", {
+      const response = await fetch(`${apiUrl}/update`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, productId, quantity }),
@@ -97,7 +99,7 @@ export const cartStore = create((set) => ({
   deleteCartItem: async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/baskets/${localStorage.getItem(
+        `${apiUrl}/baskets/${localStorage.getItem(
           "userId"
         )}/${productId}`,
         {
@@ -135,7 +137,7 @@ export const cartStore = create((set) => ({
 
   cartFetch: async (userId) => {
     try {
-      const response = await fetch(`http://localhost:8000/baskets/${userId}`);
+      const response = await fetch(`${apiUrl}/baskets/${userId}`);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -161,7 +163,7 @@ export const cartStore = create((set) => ({
       const userId = cartStore.getState().userId;
       if (userId) {
         const response = await fetch(
-          `http://localhost:8000/baskets/clear/${userId}`,
+          `${apiUrl}/baskets/clear/${userId}`,
           {
             method: "DELETE",
           }

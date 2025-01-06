@@ -1,5 +1,7 @@
 import { create } from "zustand";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const useBasketStore = create((set) => ({
   basket: null,
   isLoading: false,
@@ -8,7 +10,7 @@ export const useBasketStore = create((set) => ({
   getBasketItems: async (userId) => {
     set({ isLoading: true });
     try {
-      const response = await fetch(`/api/basket/${userId}`);
+      const response = await fetch(`${apiUrl}/api/basket/${userId}`);
       if (!response.ok) {
         throw new Error("Error fetching basket");
       }
@@ -25,7 +27,7 @@ export const useBasketStore = create((set) => ({
   addToBasket: async (userId, eventId, bookingId, quantity) => {
     set({ isLoading: true });
     try {
-      const response = await fetch("/api/basket", {
+      const response = await fetch(`${apiUrl}/api/basket`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +55,7 @@ export const useBasketStore = create((set) => ({
   updateBasketItem: async (userId, bookingId, quantity) => {
     set({ isLoading: true });
     try {
-      const response = await fetch("/api/basket/update", {
+      const response = await fetch(`${apiUrl}/api/basket/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +82,7 @@ export const useBasketStore = create((set) => ({
   deleteBasketItem: async (userId, bookingId) => {
     set({ isLoading: true });
     try {
-      const response = await fetch(`/api/basket/${userId}/${bookingId}`, {
+      const response = await fetch(`${apiUrl}/api/basket/${userId}/${bookingId}`, {
         method: "DELETE",
       });
       if (!response.ok) {

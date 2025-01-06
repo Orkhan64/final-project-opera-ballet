@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const ResetPass = () => {
   const emailRef = useRef();
   const [message, setMessage] = useState("");
@@ -15,7 +17,7 @@ const ResetPass = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/auth/request-password-reset",
+        `${apiUrl}/auth/request-password-reset`,
         {
           method: "POST",
           headers: {

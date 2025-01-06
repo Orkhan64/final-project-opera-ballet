@@ -3,6 +3,10 @@ import Slider from "react-slick";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import EventsImage from "../../assets/Events.svg";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
+console.log(apiUrl, "apiUrl")
+
 const StreamEvents = () => {
   const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +15,7 @@ const StreamEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:8000/streams");
+        const response = await fetch(`${apiUrl}/streams`);
         const data = await response.json();
         const mostWatched = data.filter((event) => event.mostWatched);
         setEvents(mostWatched);

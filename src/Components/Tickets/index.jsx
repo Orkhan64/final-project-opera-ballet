@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./loading.css";
 import ballerinaImages from "../../assets/school.png";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const options = { year: "numeric", month: "short", day: "numeric" };
@@ -18,7 +20,7 @@ const Movies = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch("http://localhost:8000/movie");
+        const response = await fetch(`${apiUrl}/movie`);
         if (!response.ok) {
           throw new Error("An error occurred while retrieving movies.");
         }

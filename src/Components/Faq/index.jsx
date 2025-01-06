@@ -7,6 +7,8 @@ import {
 import ballerinaImages from "../../assets/school.png";
 import "./../Products/loading.css";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const CUSTOM_ANIMATION = {
   mount: { scale: 1 },
   unmount: { scale: 0.9 },
@@ -19,7 +21,7 @@ const Faq = () => {
 
   const fetchFaqs = async () => {
     try {
-      const response = await fetch("http://localhost:8000/faqs");
+      const response = await fetch(`${apiUrl}/faqs`);
       if (!response.ok) {
         throw new Error("Failed to retrieve FAQ data");
       }
